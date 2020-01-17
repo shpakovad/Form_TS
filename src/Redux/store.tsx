@@ -1,8 +1,9 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import loginReducer from "./Reducers/LoginReducer";
 import registerReducer from "./Reducers/RegisterReducer";
 import forgotReducer from "./Reducers/ForgotReducer";
 import profileReducer from "./Reducers/ProfileReducer";
+import thunkMiddleware from "redux-thunk";
 
 
 // let store = rootReducer(combineReducers({
@@ -23,6 +24,6 @@ let store = createStore(combineReducers({
     forgot:forgotReducer,
     profile:profileReducer
 
-}));
+}),applyMiddleware(thunkMiddleware));
 
 export default store
