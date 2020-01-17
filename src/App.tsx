@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Login from './Components/Login'
+import { Route } from 'react-router-dom';
+import Register from './Components/Register';
+import Forgot from './Components/Forgot';
+import Profile from './Components/Profile';
 
-const App: React.FC = () => {
+
+interface IProps {
+
+}
+
+const App= (props:IProps) => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <header className='header'>
+            <a href='/login'>Login</a>
+            <a href='/register'>Register</a>
+            <a href='/forgot'>Forgot</a>
+            <a href='/profile'>Profile</a>
+        </header>
+        <div>
+            <Route path='/login' component={Login}/>
+            <Route path='/register' component={Register}/>
+            <Route path='/forgot' component={Forgot}/>
+            <Route path='/profile' component={Profile}/>
+        </div>
+
     </div>
   );
 }
+
+
 
 export default App;
