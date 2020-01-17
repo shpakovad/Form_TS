@@ -31,6 +31,4 @@ const App = (props: IProps) => {
   );
 }
 
-
-
 export default App;
