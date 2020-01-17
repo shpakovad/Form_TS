@@ -1,13 +1,15 @@
-const LOGIN ='LOGIN'
+import { auth } from "../../Components/Register/RegisterAPI";
 
-const initialState={
+const REGISTER = 'LOGIN'
+
+const initialState = {
 
 };
 
-const registerReducer=(state=initialState,action:LoginActionsTypes)=> {
+const registerReducer = (state = initialState, action: LoginActionsTypes) => {
     switch (action.type) {
-        case LOGIN:
-            return{
+        case REGISTER:
+            return {
                 state
             }
     }
@@ -15,12 +17,23 @@ const registerReducer=(state=initialState,action:LoginActionsTypes)=> {
 };
 
 interface ILogin {
-    type:typeof LOGIN
+    type: typeof REGISTER
 }
-type LoginActionsTypes=ILogin
+type LoginActionsTypes = ILogin
 
-export const loginAC=()=> {
-    return{type:LOGIN}
+export const loginAC = () => {
+    return { type: REGISTER }
 }
 
 export default registerReducer
+
+export const register = (email: string, password: number) => {
+    debugger
+    return async (dispatch: any) => {
+        try {
+            await auth.register(email, password)
+        } catch (error) {
+            alert(error.response.data.error);
+        }
+    }
+}
