@@ -7,7 +7,7 @@ interface IProps {
 
 const Register = (props: IProps) => {
 
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
     const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
