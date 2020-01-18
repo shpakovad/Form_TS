@@ -1,7 +1,8 @@
 import React, { useState, ChangeEvent } from 'react';
-import { useDispatch } from 'react-redux';
-import s from './Register.module.css'
+import { useDispatch, useSelector } from 'react-redux';
+import s from './Register.module.css';
 import { register } from '../../Redux/Reducers/RegisterReducer';
+import { Redirect } from 'react-router-dom';
 
 interface IProps {
 
@@ -11,6 +12,8 @@ const Register = (props: IProps) => {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const loading = useSelector((store: any) => store.register.loading)
+    const redirect = useSelector((store: any) => store.register.redirect)
 
     const dispatch = useDispatch()
 
@@ -27,14 +30,20 @@ const Register = (props: IProps) => {
         setPassword(e.currentTarget.value)
     }
 
-    return (<div className={s.wrapper}>
-        <div>Register</div>
-        <input value={email} onChange={onChangeEmail}></input>
-        <input type='password' value={password} onChange={onChangePass}></input>
-        <input type='password' value={password}></input>
-        <button onClick={sendRegisterData}>Register</button>
-        <a href="#/sign-in">Sign In</a>
-    </div>)
+    if (redirect) {
+        return <Redirect from='/register' to='/login' />
+    }
+
+    return (
+        <div className={s.wrapper}>
+            <div>Register</div>
+            <input value={email} onChange={onChangeEmail}></input>
+            <input type='password' value={password} onChange={onChangePass}></input>
+            <input type='password' value={password}></input>
+            <button onClick={sendRegisterData} disabled={loading}>Register</button>
+            <a href='/login'>Sign In</a>
+            {loading && <div>Loading...</div>}
+        </div>)
 };
 
 export default Register;
